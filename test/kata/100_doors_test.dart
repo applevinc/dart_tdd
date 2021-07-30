@@ -17,7 +17,7 @@ void main() {
 
     door.state = DoorState.open;
     door.toggle();
-    expect(door.state, DoorState.closed);
+    expect(door.state, DoorState.holding);
   });
 
   group('door passing(inner)', () {
@@ -102,17 +102,10 @@ void main() {
     var doors = List<Door>.generate(3, (i) => Door(i));
     doors[0].state = DoorState.closed;
     doors[1].state = DoorState.open;
-    doors[2].state = DoorState.open;
+    doors[2].state = DoorState.holding;
 
-    var output = '';
-    for (var i = 0; i < doors.length; i++) {
-      if (doors[i].state == DoorState.closed) {
-        output = output + '#';
-      } else {
-        output = output + '@';
-      }
-    }
+    var output = printDoorState(doors);
 
-    expect(output, '#@@');
+    expect(output, '#@H');
   });
 }

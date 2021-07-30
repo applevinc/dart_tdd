@@ -1,4 +1,4 @@
-enum DoorState { open, closed }
+enum DoorState { open, closed, holding }
 
 class Door {
   var state = DoorState.closed;
@@ -7,10 +7,16 @@ class Door {
   Door(this.id);
 
   void toggle() {
-    if (state == DoorState.closed) {
-      state = DoorState.open;
-    } else {
-      state = DoorState.closed;
+    switch (state) {
+      case DoorState.closed:
+        state = DoorState.open;
+        break;
+      case DoorState.open:
+        state = DoorState.holding;
+        break;
+      case DoorState.holding:
+        state = DoorState.closed;
+        break;
     }
   }
 }
@@ -26,10 +32,16 @@ void passing(List<Door> doors) {
 String printDoorState(List<Door> doors) {
   var output = '';
   for (var i = 0; i < doors.length; i++) {
-    if (doors[i].state == DoorState.closed) {
-      output = output + '#';
-    } else {
-      output = output + '@';
+    switch (doors[i].state) {
+      case DoorState.open:
+        output = output + '@';
+        break;
+      case DoorState.closed:
+        output = output + '#';
+        break;
+      case DoorState.holding:
+        output = output + 'H';
+        break;
     }
   }
   return output;

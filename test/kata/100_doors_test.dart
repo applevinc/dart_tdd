@@ -94,8 +94,8 @@ void main() {
     passing(doors);
 
     expect(doors[0].state, DoorState.open);
-    expect(doors[1].state, DoorState.closed);
-    expect(doors[2].state, DoorState.closed);
+    expect(doors[1].state, DoorState.holding);
+    expect(doors[2].state, DoorState.holding);
   });
 
   test('print door state', () {
